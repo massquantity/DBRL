@@ -87,8 +87,8 @@ def last_eval(
         #    print("top probs: ", action_probs[0][rec_index[0][:7]].detach())
 
     rec_idxs = rec_idxs.cpu().detach()
-    print(f"{mode} recommendations: "
-          f"\n{rec_idxs[[0, 17, 100, 684, 1000, 1584, 3000]]}")
+    # print(f"{mode} recommendations: "
+    #      f"\n{rec_idxs[[0, 17, 100, 684, 1000, 1584, 3000]]}")
     true_items = train_user_consumed if mode == "train" else test_user_consumed
     return ndcg_at_k(true_items, rec_idxs.numpy(), range(n_users), n_rec)
 

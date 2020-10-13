@@ -66,14 +66,14 @@ def last_eval(
                 rec_idxs.append(rec_index)
 
             rec_idxs = torch.cat(rec_idxs, dim=0)
-            action = action.cpu().detach()
-            top_scores = top_scores.cpu().detach()
-            print(f"{mode} continuous action - "
-                  f"min: {action.min():.4f}, "
-                  f"max: {action.max():.4f}, "
-                  f"mean: {action.mean():.4f}"
-                  f"\n\t{action[0][:7]}")
-            print("top scores: ", top_scores[0][:7])
+        #    action = action.cpu().detach()
+        #    top_scores = top_scores.cpu().detach()
+        #    print(f"{mode} continuous action - "
+        #          f"min: {action.min():.4f}, "
+        #          f"max: {action.max():.4f}, "
+        #          f"mean: {action.mean():.4f}"
+        #          f"\n\t{action[0][:7]}")
+        #    print("top scores: ", top_scores[0][:7])
 
         elif model_name == "reinforce":
             for i in tqdm(range(0, n_users, eval_batch_size), desc="last_eval"):
@@ -83,8 +83,8 @@ def last_eval(
                 _, rec_index = torch.topk(action_probs, n_rec, dim=1)
                 rec_idxs.append(rec_index)
             rec_idxs = torch.cat(rec_idxs, dim=0)
-            action_probs = action_probs.cpu().detach()
-            print("top probs: ", action_probs[0][rec_index[0][:7]].detach())
+        #    action_probs = action_probs.cpu().detach()
+        #    print("top probs: ", action_probs[0][rec_index[0][:7]].detach())
 
     rec_idxs = rec_idxs.cpu().detach()
     print(f"{mode} recommendations: "

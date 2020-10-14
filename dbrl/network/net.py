@@ -171,9 +171,11 @@ class PolicyPi(Actor):
         user_repr = self.user_embeds(data["beta_user"])
         items = data["beta_item"]
         if not self.attention:
-            true_num = torch.sum(items != self.pad_val, dim=1) + 1e-5
-            item_repr = self.item_embeds(items).sum(dim=1)
-            item_repr = torch.div(item_repr, true_num.float().view(-1, 1))
+        #    true_num = torch.sum(items != self.pad_val, dim=1) + 1e-5
+        #    item_repr = self.item_embeds(items).sum(dim=1)
+        #    item_repr = torch.div(item_repr, true_num.float().view(-1, 1))
+            batch_size = data["item"].size(0)
+            item_repr = self.item_embeds(data["item"]).view(batch_size, -1)
         else:
             item_repr = self.item_embeds(items)
             item_repr = multihead_attention(self.attention, user_repr,

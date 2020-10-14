@@ -51,7 +51,7 @@ def process_data(path, columns=None, test_size=0.2, time_col="time",
     data = pd.read_csv(path, sep=",", names=column_names)
     assert time_col in data.columns, "must specify correct time column name..."
 
-    data = data.sort_values(by=time_col).reset_index(drop=True)
+    # data = data.sort_values(by=time_col).reset_index(drop=True)
     train_data, test_data = split_by_ratio(data, shuffle=False,
                                            test_size=test_size,
                                            pad_unknown=True,
@@ -60,7 +60,7 @@ def process_data(path, columns=None, test_size=0.2, time_col="time",
     train_data, test_data = map_unique_value(train_data, test_data)
     n_users = train_data.user.nunique()
     n_items = train_data.item.nunique()
-    # groupby too slow...
+    # pandas groupby too slow...
     # train_user_consumed = train_data.groupby("user")["item"].apply(
     #    lambda x: list(x)).to_dict()
     # test_user_consumed = test_data.groupby("user")["item"].apply(
@@ -93,7 +93,7 @@ def process_feat_data(path, columns=None, test_size=0.2, time_col="time",
                  static_feat=None, dynamic_feat=None):
     column_names = columns if columns is not None else None
     data = pd.read_csv(path, sep=",", names=column_names)
-    data = data.sort_values(by=time_col).reset_index(drop=True)
+    # data = data.sort_values(by=time_col).reset_index(drop=True)
     train_data, test_data = split_by_ratio(data, shuffle=False,
                                            test_size=test_size,
                                            pad_unknown=True,
@@ -148,8 +148,6 @@ def map_unique_value_feat(train_data, test_data, static_feat=None,
     if dynamic_feat is not None:
         total_cols.extend(dynamic_feat)
     for col in total_cols:
-        # unique_vals = np.unique(train_data[col]).tolist()
-        # mapping = dict(zip(unique_vals, range(len(unique_vals))))
         # map according to frequency
         counts = train_data[col].value_counts()
         freq = counts.index.tolist()
@@ -175,6 +173,10 @@ def build_interaction(data):
 
 
 def build_reward(data, reward_shape):
+    """
+    Reward format: {user_index: {label_name: list of index in interaction}
+    For example, {1: {"pv": [1,3,5,6]}, {"cart": [2]}, {"buy": [4]}}
+    """
     label_all = defaultdict(list)
     for u, l in zip(data.user.tolist(), data.label.tolist()):
         label_all[u].append(l)

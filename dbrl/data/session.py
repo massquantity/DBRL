@@ -13,6 +13,30 @@ def rolling_window(a, window):
 
 
 def pad_session(hist_len, hist_num, hist_items, pad_val):
+    """Pad items sequentially.
+
+    For example, a user's whole item interaction is [1,2,3,4,5],
+    then it will be converted to the following matrix:
+    x x x x 1 2
+    x x x 1 2 3
+    x x 1 2 3 4
+    x 1 2 3 4 5
+
+    Where x denotes the padding-value. Then for the first line, [x x x x 1]
+    will be used as state, and [2] as action.
+
+    If the length of interaction is longer than hist_num, the rest will be
+    handled by function `rolling_window`, which converts the rest of
+    interaction to:
+    1 2 3 4 5 6
+    2 3 4 5 6 7
+    3 4 5 6 7 8
+    ...
+
+    In this case no padding value is needed. So basically every user in the
+    data will call `pad_session`, but only users with long interactions will
+    need to call `rolling_window`.
+    """
     sess_len = hist_len - 1 if hist_len - 1 < hist_num - 1 else hist_num - 1
     session_first = np.full((sess_len, hist_num + 1), pad_val, dtype=np.int64)
     for i in range(sess_len):
@@ -121,9 +145,10 @@ def sample_neg_session(items, consumed, n_items, sample_mode):
 def assign_reward(sess_len, user, train_flag, train_rewards, test_rewards,
                   train_user_consumed, hist_num, reward_shape):
     reward = np.ones(sess_len, dtype=np.float32)
+
     if train_flag and train_rewards is not None:
         for label, index in train_rewards[user].items():
-            # skip first as it will never become label
+            # skip first item as it will never become label
             index = index - 1
             index = index[index >= 0]
             if len(index) > 0:

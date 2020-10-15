@@ -79,7 +79,7 @@ class BCQ(nn.Module):
         self.step += 1
         info = {
             "generator_loss": generator_loss.cpu().detach().item(),
-            "perturb_loss": (
+            "perturbator_loss": (
                 perturb_loss.cpu().detach().item()
                 if perturb_loss is not None
                 else None
@@ -101,7 +101,7 @@ class BCQ(nn.Module):
         perturb_loss, action = self._compute_perturb_loss(state)
         info = {
             "generator_loss": generator_loss.cpu().detach().item(),
-                        "perturb_loss": (
+            "perturbator_loss": (
                 perturb_loss.cpu().detach().item()
                 if perturb_loss is not None
                 else None

@@ -31,7 +31,10 @@ def train_model(
     model_name = model.__class__.__name__.lower()
     if model_name in ("bcq", "ddpg"):
         item_embeds = torch.as_tensor(item_embeds)
-        item_embeds = item_embeds / torch.norm(item_embeds, dim=1, keepdim=True)
+        # ignore last item since it's all zero.
+        item_embeds[:-1] = item_embeds[:-1] / torch.norm(
+            item_embeds[:-1], dim=1, keepdim=True
+        )
         item_embeds = item_embeds.to(device)
 
     train_batch_data = build_batch_data(

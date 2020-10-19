@@ -8,7 +8,7 @@ and Perspectives on Open Problems](https://arxiv.org/pdf/2005.01643.pdf) for a c
 
 After the training, the model can be used for online serving. And indeed It has an online part, which mainly leverages Flink and the trained model for online recommendation. See [FlinkRL](https://github.com/massquantity/flink-reinforcement-learning) for more details. The full system architecture is as follows :
 
-![](https://s1.ax1x.com/2020/10/19/0x5JAI.png)
+![](https://s1.ax1x.com/2020/10/19/0x53Bd.png)
 
 
 

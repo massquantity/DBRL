@@ -8,9 +8,8 @@ from pprint import pprint
 import numpy as np
 import torch
 from torch.optim import Adam
-from dbrl.data.process import process_data
-from dbrl.data.dataset import build_dataloader
-from dbrl.models.ddpg import DDPG
+from dbrl.data import process_data, build_dataloader
+from dbrl.models import DDPG
 from dbrl.network import Actor, Critic
 from dbrl.trainer import train_model
 from dbrl.utils.params import count_vars, init_param

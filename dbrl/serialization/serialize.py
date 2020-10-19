@@ -17,8 +17,8 @@ def save_json(user_map, item_map, user_embeds, item_embeds, path):
         json.dump(user_map, f, separators=(',', ':'))
     with open(os.path.join(path, "item_map.json"), "w") as f:
         json.dump(item_map, f, separators=(',', ':'))
-    embeds = dict()
-    embeds["user"] = user_embeds.tolist()
-    embeds["item"] = item_embeds.tolist()
-    with open(os.path.join(path, "embeddings.json"), "w") as f:
-        json.dump(embeds, f, separators=(',', ':'))
+    # embeds = dict()
+    # embeds["user"] = user_embeds.tolist()
+    # embeds["item"] = item_embeds.tolist()
+    # with open(os.path.join(path, "embeddings.json"), "w") as f:
+    #    json.dump(embeds, f, separators=(',', ':'))

@@ -8,9 +8,8 @@ from pprint import pprint
 import numpy as np
 import torch
 from torch.optim import Adam
-from dbrl.data import process_data
-from dbrl.data import build_dataloader
-from dbrl.models.youtube_topk import Reinforce
+from dbrl.data import process_data, build_dataloader
+from dbrl.models import Reinforce
 from dbrl.network import PolicyPi, Beta
 from dbrl.trainer import train_model
 from dbrl.utils import count_vars, init_param

@@ -9,9 +9,8 @@ import itertools
 import numpy as np
 import torch
 from torch.optim import Adam
-from dbrl.data.process import process_data
-from dbrl.data.dataset import build_dataloader
-from dbrl.models.bcq import BCQ
+from dbrl.data import process_data, build_dataloader
+from dbrl.models import BCQ
 from dbrl.network import VAE, Perturbator, Critic
 from dbrl.trainer import train_model
 from dbrl.utils.params import count_vars, init_param_bcq

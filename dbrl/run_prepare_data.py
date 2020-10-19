@@ -70,6 +70,6 @@ if __name__ == "__main__":
     behavior = behavior.merge(item_feat, on="item")
     behavior["age"] = behavior["age"].apply(bucket_age)
     behavior = behavior.sort_values(by="time").reset_index(drop=True)
-    behavior.to_csv("tianchi.csv", header=None, index=False)
+    behavior.to_csv("resources/tianchi.csv", header=None, index=False)
     print(f"prepare data done!, "
           f"time elapsed: {(time.perf_counter() - start_time):.2f}")

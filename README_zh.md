@@ -1,6 +1,6 @@
 # DBRL
 
-### `English`  &nbsp;  `简体中文`
+### [`English`](https://github.com/massquantity/DBRL)  &nbsp;  `简体中文`
 
 <br>
 
@@ -8,7 +8,7 @@ DBRL 是一个用于训练强化学习推荐模型的工具。DBRL 意为：Data
 
 训练完成后的模型可用于在线服务，本仓库的在线部分位于 [FlinkRL](https://github.com/massquantity/flink-reinforcement-learning) ，主要使用 Flink 和训练后的强化学习模型作在线推荐。下面是整个系统架构：
 
-![](/home/massquantity/Documents/Flink_RL/readme2.png)
+![](https://s1.ax1x.com/2020/10/19/0x5JAI.png)
 
 
 
